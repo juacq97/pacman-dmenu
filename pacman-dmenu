@@ -1,5 +1,21 @@
 #! /bin/sh
 
+##################
+# DEAFULT VALUES
+##################
+
+if [ -z $PACMAN_DMENU_TERM ]; then PACMAN_DMENU_TERM="xterm"; fi
+if [ -z $PACMAN_DMENU_LIST ]; then PACMAN_DMENU_LIST="dmenu -l 20"; fi
+if [ -z $PACMAN_DMENU_MENU ]; then PACMAN_DMENU_MENU="dmenu"; fi
+if [ -z $PACMAN_DMENU_PASS ]; then PACMAN_DMENU_PASS="zenity"; fi
+
+# Three options to set the password: dmenu (needs the password patch), rofi or zenity
+case $PACMAN_DMENU_PASS in
+    dmenu) dpass="dmenu -P -p 'Password'";;
+    rofi) dpass="rofi --dmenu -password -p'Password'";;
+    zenity) dpass="zenity --password";;
+esac
+
 func_pacman() {
 case "$var" in
     "Install") 
@@ -58,21 +74,6 @@ case "$var" in
 esac
 }
 
-##################
-# DEAFULT VALUES
-##################j
-
-if [ -z $PACMAN_DMENU_TERM ]; then PACMAN_DMENU_TERM="xterm"; fi
-if [ -z $PACMAN_DMENU_LIST ]; then PACMAN_DMENU_LIST="dmenu -l 20"; fi
-if [ -z $PACMAN_DMENU_MENU ]; then PACMAN_DMENU_MENU="dmenu"; fi
-if [ -z $PACMAN_DMENU_PASS ]; then PACMAN_DMENU_PASS="zenity --password"; fi
-
-# Three options to set the password: dmenu (needs the password patch), rofi or zenity
-case $PACMAN_DMENU_PASS in
-    dmenu) dpass="dmenu -P -p 'Password'";;
-    rofi) dpass="rofi --dmenu -password -p'Password'";;
-    zenity) dpass="zenity --password";;
-esac
 
 # Initial menu
 var=$(echo -e "Install\nUninstall\nUpdate\nCancell" | $PACMAN_DMENU_MENU -p "PacMan") 
