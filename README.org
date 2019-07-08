@@ -31,7 +31,7 @@ You can write a little script like this, and use it to run ~pacman-dmenu~
   export TERMINAL='st'
   export dmenu_list="rofi --lines 20"
   export dmenu_menu="rofi --dmenu"
-  export dmenu_pass="rofi --dmenu -password"
+  export dmenu_pass="rofi"
 
   ~/path/to/script
 #+END_SRC
