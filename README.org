@@ -1,0 +1,38 @@
+* pacman-dmenu. Basic actions of the package manager using dmenu
+
+** Introduction
+
+Pacman-dmenu allows you, to perform basic actions of the ~pacman~ package manager, directly from dmenu.
+
+*** Why?
+1. The command line is awesome, but if you don't know the exact package name, you will need to search the database first, maybe two or three times until you find the correct name. Thanks to the "navigate as you type" behaviour of dmenu, find the package is fast and easy. There's GUI applications, but these are very slow compared to dmenu.
+
+2. Dmenu opens over all the windows, the terminal doesn't, so you can install packages at the time you want. You can bind this script to a keybinding, so Installing packages can be a keystoke away.
+
+3. Write scripts is fun, this is the main reason I wrote this, and other scripts I use.
+
+** Configuration
+
+There's no config file! All is done with global variables.
+
+| Variable          | Description                                                                                                                                            |
+|-------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------|
+| PACMAN_DMENU_TERM | The name of the terminal you want to use. Default: ~xterm~                                                                                             |
+| PACMAN_DMENU_LIST | The command you want to use to list the available packages to install/remove. Default: ~dmenu -l 20~                                                   |
+| PACMAN_DMENU_MENU | The program you want to use as the fist menu. Default: ~dmenu~                                                                                         |
+| PACMAN_DMENU_PASS | The program you want to use to ask your password.. Options: dmenu, rofi, zenity. ~dmenu~ need the ~password~ patch applied to work. Default: ~zenity~. |
+   
+You can write a little script like this, and use it to run ~pacman-dmenu~
+
+#+BEGIN_SRC bash
+  #! /bin/sh
+
+  export TERMINAL='st'
+  export dmenu_list="rofi --lines 20"
+  export dmenu_menu="rofi --dmenu"
+  export dmenu_pass="rofi --dmenu -password"
+
+  ~/path/to/script
+#+END_SRC
+
+

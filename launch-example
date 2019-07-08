@@ -1,0 +1,8 @@
+#! /bin/sh
+
+export TERMINAL='st'
+export dmenu_list="dmenu -l 20"
+export dmenu_menu="dmenu"
+export dmenu_pass="dmenu"
+
+~/scripts/testings
