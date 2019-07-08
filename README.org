@@ -1,6 +1,6 @@
 * pacman-dmenu. Basic actions of the package manager using dmenu
 
-file:SCREENSHOT.png
+[[SCREENSHOT.png]]
 ** Introduction
 
 Pacman-dmenu allows you, to perform basic actions of the ~pacman~ package manager, directly from dmenu.
