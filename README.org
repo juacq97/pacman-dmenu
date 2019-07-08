@@ -28,10 +28,10 @@ You can write a little script like this, and use it to run ~pacman-dmenu~
 #+BEGIN_SRC bash
   #! /bin/sh
 
-  export TERMINAL='st'
-  export dmenu_list="rofi --lines 20"
-  export dmenu_menu="rofi --dmenu"
-  export dmenu_pass="rofi"
+  export PACMAN_DMENU_TERM='st'
+  export PACMAN_DMENU_LIST="rofi --lines 20"
+  export PACMAN_DMENU_MENU="rofi --dmenu"
+  export PACMAN_DMENU_PASS="rofi"
 
   ~/path/to/script
 #+END_SRC

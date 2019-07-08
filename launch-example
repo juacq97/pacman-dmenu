@@ -1,8 +1,8 @@
-#! /bin/sh
+  #! /bin/sh
 
-export TERMINAL='st'
-export dmenu_list="dmenu -l 20"
-export dmenu_menu="dmenu"
-export dmenu_pass="dmenu"
+  export PACMAN_DMENU_TERM='st'
+  export PACMAN_DMENU_LIST="dmenu -l 20"
+  export PACMAN_DMENU_MENU="dmenu"
+  export PACMAN_DMENU_PASS="dmenu"
 
 ~/scripts/pacman-dmenu
