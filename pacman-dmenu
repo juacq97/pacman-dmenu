@@ -60,8 +60,8 @@ case "$var" in
 	    pass=$(dpass)
 	    a=$(echo $pass | sudo -Skv) 
 	    if [ $? == 0 ]; then
-		conf=$(echo -e "Si\n No" | $PACMAN_DMENU_MENU -p "Updating the system. Continue?")
-		if [ "$conf" == "Si" ]; then
+		conf=$(echo -e "Yes\n No" | $PACMAN_DMENU_MENU -p "Updating the system. Continue?")
+		if [ "$conf" == "Yes" ]; then
 		$PACMAN_DMENU_TERM -e sh -c "echo "$pass" | sudo -S pacman -Syu "$sel" --noconfirm; read -p 'System updated. Presss Return to exit'"
 		else
 		    notify-send -a "Pacman" "Cancelled"
@@ -75,8 +75,66 @@ esac
 }
 
 
+func_apt() {
+case "$var" in
+    "Install") 
+	sel=$(apt list | cut -d"/" -f1 | $PACMAN_DMENU_LIST)
+	if [ -z "$sel" ]; then
+	    exit 0 
+	else
+	    pass=$($dpass)
+	    echo $pass | sudo -Skv
+	    if [ "$?" = "0" ]; then
+		conf=$(echo "Yes\n No" | $PACMAN_DMENU_MENU -p "Installing $sel. Continue?")
+		if [ "$conf" = "Yes" ]; then
+		$PACMAN_DMENU_TERM -e sh -c "echo "$pass" | sudo -S apt install "$sel" --yes; read -p '$sel installed. Presss Return to exit'"
+		else
+		    notify-send -a "Pacman" "Cancelled"
+		fi
+	    else
+		notify-send -a "Pacman" "Incorrect password" 
+	    fi
+	fi;;
+
+    "Uninstall")
+	sel=$(apt list --installed | cut -d"/" -f1 | $PACMAN_DMENU_LIST)
+	if [ -z "$sel" ]; then
+	    exit 0 
+	else
+	    pass=$($dpass)
+	    a=$(echo $pass | sudo -Skv)
+	    if [ $? = 0 ]; then
+		conf=$(echo "Yes\n No" | $PACMAN_DMENU_MENU -p "Uninstalling $sel. Continue?")
+		if [ "$conf" = "Yes" ]; then
+		$PACMAN_DMENU_TERM -e sh -c "echo "$pass" | sudo -S apt remove "$sel" --yes; read -p '$sel unistalled. Presss Return to exit'"
+		else
+		    notify-send -a "Pacman" "Cancelled"
+		    fi
+	    else
+		notify-send -a "Pacman" "Incorrect password"
+	    fi
+	fi;;
+
+    "Update")
+	    pass=$($dpass)
+	    a=$(echo $pass | sudo -Skv) 
+	    if [ $? = 0 ]; then
+		conf=$(echo "Yes\n No" | $PACMAN_DMENU_MENU -p "Updating the system. Continue?")
+		if [ "$conf" = "Yes" ]; then
+		$PACMAN_DMENU_TERM -e sh -c "echo "$pass" | sudo -S apt update --yes && apt upgrade --yes; read -p 'System updated. Presss Return to exit'"
+		else
+		    notify-send -a "Pacman" "Cancelled"
+		    fi
+	    else
+		notify-send -a "Pacman" "Incorrect password"
+	    fi;;
+
+    "Cancell") exit 0
+esac
+}
+
 # Initial menu
-var=$(echo -e "Install\nUninstall\nUpdate\nCancell" | $PACMAN_DMENU_MENU -p "PacMan") 
+var=$(echo "Install\nUninstall\nUpdate\nCancell" | $PACMAN_DMENU_MENU -p "PacMan") 
 
 # If someday I extend this script to be compatible with apt and xbps, tjhis code will be usefull
 pm() {

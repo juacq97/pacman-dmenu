@@ -3,10 +3,11 @@
 [[SCREENSHOT.png]]
 ** Introduction
 
-Pacman-dmenu allows you, to perform basic actions of the ~pacman~ package manager, directly from dmenu.
+Pacman-dmenu allows you to perform basic actions of the package manager, directly from dmenu. Currently supports ~pacman~ (arch) and ~apt~ (debian).
 
 *** Why?
-1. The command line is awesome, but if you don't know the exact package name, you will need to search the database first, maybe two or three times until you find the correct name. Thanks to the "navigate as you type" behaviour of dmenu, find the package is fast and easy. There's GUI applications, but these are very slow compared to dmenu.
+1. The command line is awesome, but if you don't know the exact package name, you will need to search the database first, maybe two or three times until you find the correct name. Thanks to the "navigate as you type" behaviour of dmenu, find the package it's fast and easy. There's GUI applications, but these are very slow compared to dmenu, and they are not focused on the use of the keyboard, but on using the mouse.
+
 
 2. Dmenu opens over all the windows, the terminal doesn't, so you can install packages at the time you want. You can bind this script to a keybinding, so Installing packages can be a keystoke away.
 
@@ -33,7 +34,7 @@ You can write a little script like this, and use it to run ~pacman-dmenu~
   export PACMAN_DMENU_MENU="rofi --dmenu"
   export PACMAN_DMENU_PASS="rofi"
 
-  ~/path/to/script
+  ~/path/to/pacman-dmenu
 #+END_SRC
 
 
