@@ -134,7 +134,7 @@ esac
 }
 
 # Initial menu
-var=$(echo "Install\nUninstall\nUpdate\nCancell" | $PACMAN_DMENU_MENU -p "PacMan") 
+var=$(echo -e "Install\nUninstall\nUpdate\nCancell" | $PACMAN_DMENU_MENU -p "PacMan") 
 
 # If someday I extend this script to be compatible with apt and xbps, tjhis code will be usefull
 pm() {
